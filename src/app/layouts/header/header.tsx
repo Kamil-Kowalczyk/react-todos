@@ -1,12 +1,11 @@
 import styles from './header.module.scss';
-import 'boostrap'
 
 export interface HeaderProps {}
 
 export function Header(props: HeaderProps) {
   return (
-    <div className={styles['container']}>
-      <h1 className=''>Todo list</h1>
+    <div className='container'>
+      <h1 className={`h1 display-5 text-white mt-5 text-center ${styles['heading']}`}>Todo list</h1>
     </div>
   );
 }

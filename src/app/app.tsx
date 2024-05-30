@@ -1,4 +1,4 @@
-import styles from './app.module.scss';
+import './app.module.scss';
 import Header from './layouts/header/header';
 
 export function App() {
