@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styles from './todo-adder.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import IconButton from '../reusable/icon-button/icon-button';
 
 /* eslint-disable-next-line */
 export interface TodoAdderProps {
@@ -24,10 +25,9 @@ export function TodoAdder({ handleTodoAdd }: TodoAdderProps) {
         placeholder='Type here a new todo...'
       />
       <div className='col-1 text-center'>
-        <FontAwesomeIcon
-          icon={faCirclePlus}
+        <IconButton 
+          icon={faCirclePlus} 
           onClick={() => handleTodoAdd(todoName)} 
-          className={`${styles['plusIcon']}`}
         />
       </div>
     </div>
