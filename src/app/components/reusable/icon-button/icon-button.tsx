@@ -15,7 +15,7 @@ export function IconButton({ onClick, icon, style }: IconButtonProps) {
   return (
     <button 
       className={`btn`}
-      onClick={() => onClick()} 
+      onClick={(event) => {onClick(); event.currentTarget.blur()}} 
       style={style?.button}
     >
       <FontAwesomeIcon
