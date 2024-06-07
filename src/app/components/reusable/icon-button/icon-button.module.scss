@@ -1,10 +1,10 @@
-button {
+.button {
     padding: 0 0 0 0 !important;
 }
-button:focus {
+.button:focus {
     outline: 0.1em rgb(167, 170, 255) solid !important;
 }
-button:active {
+.button:active {
     border-color: white !important;
 }
 .icon {

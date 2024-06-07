@@ -1,7 +1,10 @@
 .holder {
     background: white;
 }
-input {
+.todoInput {
     outline: 0;
     border: 0
+}
+.focusedInput {
+    outline: 0.1em black solid
 }

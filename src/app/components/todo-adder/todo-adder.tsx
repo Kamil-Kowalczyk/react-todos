@@ -29,6 +29,7 @@ function ValidationErrorPopup({ show, onHide }: ValidationErrorPopupProps) {
 export function TodoAdder({ handleTodoAdd }: TodoAdderProps) {
   const [todoName, setTodoName] = useState<string>("")
   const [isError, setIsError] = useState<boolean>(false)
+  const [isInputFocused, setIsInputFocused] = useState<boolean>(false)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTodoName(event.target.value)
@@ -47,19 +48,32 @@ export function TodoAdder({ handleTodoAdd }: TodoAdderProps) {
     setIsError(false)
   }
 
+  const handleInputFocus = () => {
+    setIsInputFocused(true)
+  }
+
+  const handleInputBlur = () => {
+    setIsInputFocused(false)
+  }
+
   return (
     <>
       <ValidationErrorPopup
         show={isError} 
         onHide={handlePopupHide}
       />
-      <div className={`p-3 rounded-5 d-inline-flex w-100 ${styles['holder']}`}>
+      <div 
+        className={`p-3 rounded-5 d-inline-flex w-100 ${styles['holder']} 
+          ${isInputFocused ? styles['focusedInput'] : ''}`}
+      >
         <input 
           type='text'
-          className='form-input col-11 text-center' 
+          className={`form-input col-11 text-center ${styles['todoInput']}`}
           onChange={handleChange}
           value={todoName}
           placeholder='Type here a new todo...'
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
         />
         <div className='col-1 text-center'>
           <IconButton 
