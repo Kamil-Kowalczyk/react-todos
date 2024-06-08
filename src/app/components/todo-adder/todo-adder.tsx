@@ -2,33 +2,15 @@ import { useState } from 'react';
 import styles from './todo-adder.module.scss';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import IconButton from '../reusable/icon-button/icon-button';
-import { Modal, ModalBody, ModalHeader } from 'react-bootstrap';
+import { Alert, Modal, ModalBody, ModalHeader } from 'react-bootstrap';
 
 export interface TodoAdderProps {
   handleTodoAdd: (todoName: string) => void
 }
 
-interface ValidationErrorPopupProps {
-  show: boolean
-  onHide: () => void
-}
-
-function ValidationErrorPopup({ show, onHide }: ValidationErrorPopupProps) {
-  return (
-    <Modal show={show} onHide={onHide}>
-      <ModalHeader closeButton className={`${styles['modalHeader']}`}>
-        <h5 className='h5'>Validation Error</h5>
-      </ModalHeader>
-      <ModalBody className={`${styles['modalHeader']}`}>
-        <h2 className='h2 text-center text-danger'>A new todo should be at least one character long!</h2>
-      </ModalBody>
-    </Modal>
-  )
-}
-
 export function TodoAdder({ handleTodoAdd }: TodoAdderProps) {
   const [todoName, setTodoName] = useState<string>("")
-  const [isError, setIsError] = useState<boolean>(false)
+  const [error, setError] = useState<boolean>(false)
   const [isInputFocused, setIsInputFocused] = useState<boolean>(false)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,15 +19,12 @@ export function TodoAdder({ handleTodoAdd }: TodoAdderProps) {
 
   const handleClick = () => {
     if (todoName == "") {
-      setIsError(true)
+      setError(true)
     } else {
       handleTodoAdd(todoName)
       setTodoName("")
+      setError(false)
     }
-  }
-
-  const handlePopupHide = () => {
-    setIsError(false)
   }
 
   const handleInputFocus = () => {
@@ -58,10 +37,6 @@ export function TodoAdder({ handleTodoAdd }: TodoAdderProps) {
 
   return (
     <>
-      <ValidationErrorPopup
-        show={isError} 
-        onHide={handlePopupHide}
-      />
       <div 
         className={`p-3 rounded-5 d-inline-flex w-100 ${styles['holder']} 
           ${isInputFocused ? styles['focusedInput'] : ''}`}
@@ -82,6 +57,13 @@ export function TodoAdder({ handleTodoAdd }: TodoAdderProps) {
           />
         </div>
       </div>
+      {
+        error && (
+          <Alert className='fixed-top' dismissible onClose={() => setError(false)} variant='danger'>
+            <p className={`text-center`}> Name should be at least one character long!</p>
+          </Alert>
+        )
+      }
     </>
   );
 }
