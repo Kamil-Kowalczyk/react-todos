@@ -27,7 +27,7 @@ function TodoListItem({ name, completed, handleEdit, handleDelete, handleComplet
   return (
     <div className={`${completed ? styles['completed'] : ''} bg-white mb-3 rounded-5 p-3 d-flex w-100`}>
       <div className=' col-9 ps-4 row m-0' >
-        <div className={`d-flex my-auto ${completed ? 'text-decoration-line-through' : ''}`}>
+        <div className={`d-flex my-auto text-break ${completed ? 'text-decoration-line-through' : ''}`}>
           {name}
         </div>
       </div>
